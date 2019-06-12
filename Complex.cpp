@@ -1,5 +1,7 @@
 #include "Complex.h"
 
+using namespace std;
+
 Complex :: Complex() {
     a = 0;
     b = 0;
@@ -19,7 +21,7 @@ int Complex :: StringToInt(string num) {
 		num1 = num.substr(1);
 	else
 		num1 = num;
-	int size = num1.size();	
+	int size = num1.size();
 	for(int i = 0,j = size ; i < size; i++) {
 		Num += (num1[--j] -'0')*pow(10,i);
 	}
@@ -58,17 +60,18 @@ int inline Complex :: getImag() {
 	return b;
 }
 
-void Complex :: input(string input) { 
+void Complex :: input(string _input) {
 	string cnum;
-	cout<<input;
+	cout<<_input;
 	cin>>cnum;
+
 	if(cnum.at(cnum.length() - 1) == 'i') {
 		a = this->ExtractReal(cnum);
 		b = this->ExtractImaginary(cnum);
 	}
 	else {
 		cout<<"Plz Give Proper Input Eg :- 3+6i\n" ;
-		this->input(input);
+		this->input(_input);
 	}
 }
 
@@ -136,7 +139,7 @@ Complex Complex :: operator-(int c) {
 }
 
 istream& operator >>(istream &in,Complex &C) {
-    cin>>C.a>>C.b;
+    C.input("");
     return(in);
 }
 
@@ -153,7 +156,7 @@ ostream& operator <<(ostream &out,Complex C) {
     }
 }
 
-main() {
+int main() {
 	Complex c1,c2;
     c1.input("Enter A Complex Number : ");
     c2.input("Enter A Complex Nunber : ");
@@ -169,6 +172,5 @@ main() {
     cout<<"Positive : "<<+c1<<" "<<+c2<<endl;
     cout<<"Addition With 3 : "<<c1+3<<" "<<" Subtraction With 6 : "<<c2-6<<endl;
     cout<<c1.Conjugate()<<" "<<c2.Conjugate();
-    getch();
     return 0;
 }
